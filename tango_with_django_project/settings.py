@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rango',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -101,5 +102,9 @@ TEMPLATE_DIRS = [
         TEMPLATE_PATH,
         ]
 
-LOGIN_URL = '/rango/login/'
+REGISTRATION_OPEN = True               # Users can register
+ACCOUNT_ACTIVATION_DAYS = 7            # One week activation window
+REGISTRATION_AUTO_LOGIN = True         # Users automatically logged in
+LOGIN_REDIRECT_URL = '/rango/'         # Where users arrive after login
+LOGIN_URL = '/accounts/login/'         # Where users are directed for login
 
