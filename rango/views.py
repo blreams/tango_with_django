@@ -150,6 +150,21 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': cat}
     return render(request, 'rango/add_page.html', context_dict)
 
+@login_required
+def like_category(request):
+    cat_id = None
+    if request.method == 'GET':
+        cat_id = request.GET['category_id']
+
+    likes = 0
+    if cat_id:
+        cat = Category.objects.get(id=int(cat_id))
+        if cat:
+            likes = cat.likes + 1
+            cat.likes = likes
+            cat.save()
+    return HttpResponse(likes)
+
 #UNUSED#def register(request):
 #UNUSED#    # A boolean value for telling the template whether the registration was successful.
 #UNUSED#    # Initially set to False, will change to True if registration is successful.
